@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { LinhaParadas } from '../components/home/LinhaParadas'
 import { IconeAlerta, IconeCaixa, IconeCheck, IconePin, IconeRelogio } from '../components/icones'
@@ -10,6 +11,9 @@ import { useApi } from '../hooks/useApi'
 import { useTitulo } from '../hooks/useTitulo'
 import { rastrear } from '../services/rastreioService'
 import type { Rastreio } from '../types/api'
+
+// de quanto em quanto tempo a página pergunta de novo para a API (em milissegundos)
+const INTERVALO_ATUALIZACAO = 20_000
 
 // acima disso a linha de paradas não cabe no celular; mostramos só o número
 const MAXIMO_NA_LINHA = 8
@@ -88,6 +92,21 @@ export function RastreioDetalhe() {
   const { codigo = '' } = useParams<{ codigo: string }>()
   useTitulo(`Rastreio ${codigo}`)
   const { dados, carregando, erro, recarregar } = useApi(() => rastrear(codigo), [codigo])
+  const [atualizadoEm, setAtualizadoEm] = useState<Date | null>(null)
+
+  // guarda o horário de cada resposta para mostrar "atualizado às..."
+  useEffect(() => {
+    if (dados) setAtualizadoEm(new Date())
+  }, [dados])
+
+  // consulta periódica (polling): só enquanto a encomenda está em rota.
+  // Entregue, falha ou no CD não muda a cada minuto, então não gastamos internet à toa.
+  const emRota = dados?.status === 'EM_ROTA'
+  useEffect(() => {
+    if (!emRota) return
+    const id = setInterval(recarregar, INTERVALO_ATUALIZACAO)
+    return () => clearInterval(id)
+  }, [emRota, recarregar])
 
   return (
     <Container className="max-w-2xl py-10">
@@ -121,6 +140,23 @@ export function RastreioDetalhe() {
           </header>
 
           <Situacao rastreio={dados} />
+
+          {emRota && (
+            <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-asfalto-200 pt-5 text-sm text-asfalto-500">
+              <p aria-live="polite">
+                {carregando ? 'Atualizando…' : `Atualizado às ${atualizadoEm?.toLocaleTimeString('pt-BR') ?? '—'}`}
+                <span className="block text-xs">A página se atualiza sozinha a cada 20 segundos.</span>
+              </p>
+              <button
+                type="button"
+                onClick={recarregar}
+                disabled={carregando}
+                className="min-h-11 rounded-xl border-2 border-asfalto-200 px-4 font-semibold text-asfalto-700 hover:bg-asfalto-100 disabled:opacity-60"
+              >
+                Atualizar agora
+              </button>
+            </footer>
+          )}
         </article>
       )}
     </Container>
