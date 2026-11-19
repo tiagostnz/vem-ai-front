@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router'
+import { Cabecalho } from './Cabecalho'
 
 export function Layout() {
   const { pathname } = useLocation()
@@ -17,6 +18,7 @@ export function Layout() {
       >
         Pular para o conteúdo
       </a>
+      <Cabecalho />
       <main id="conteudo" className="flex-1">
         <Outlet />
       </main>
