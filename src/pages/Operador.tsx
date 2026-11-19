@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { CardLote } from '../components/operador/CardLote'
+import { FormularioBipar } from '../components/operador/FormularioBipar'
 import { FormularioNovoLote } from '../components/operador/FormularioNovoLote'
 import { FiltroStatus, type FiltroLote } from '../components/operador/FiltroStatus'
 import { CabecalhoPagina } from '../components/ui/CabecalhoPagina'
@@ -9,17 +10,23 @@ import { EstadoErro } from '../components/ui/EstadoErro'
 import { EstadoVazio } from '../components/ui/EstadoVazio'
 import { useApi } from '../hooks/useApi'
 import { useTitulo } from '../hooks/useTitulo'
-import { listarCentros, listarEntregadores } from '../services/cadastroService'
+import { listarCentros, listarClientes, listarEntregadores } from '../services/cadastroService'
 import { listarLotes } from '../services/loteService'
 import { indexarPor } from '../utils/formatar'
 
 // as três buscas são independentes, então rodam em paralelo
 async function carregarPainel() {
-  const [lotes, centros, entregadores] = await Promise.all([listarLotes(), listarCentros(), listarEntregadores()])
+  const [lotes, centros, entregadores, clientes] = await Promise.all([
+    listarLotes(),
+    listarCentros(),
+    listarEntregadores(),
+    listarClientes(),
+  ])
   return {
     lotes: [...lotes].sort((a, b) => b.cdLote - a.cdLote),
     listaCentros: centros,
     listaEntregadores: entregadores,
+    listaClientes: clientes,
     centros: indexarPor(centros, (c) => c.cdCentro),
     entregadores: indexarPor(entregadores, (e) => e.cdEntregador),
   }
@@ -52,11 +59,15 @@ export function Operador() {
       <Container className="grid gap-8 py-12 lg:grid-cols-[340px_1fr] lg:items-start">
         <aside className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-asfalto-200 lg:sticky lg:top-24">
           {dados ? (
-            <FormularioNovoLote
-              centros={dados.listaCentros}
-              entregadores={dados.listaEntregadores}
-              aoCriar={recarregar}
-            />
+            <>
+              <FormularioNovoLote
+                centros={dados.listaCentros}
+                entregadores={dados.listaEntregadores}
+                aoCriar={recarregar}
+              />
+              <hr className="my-6 border-asfalto-200" />
+              <FormularioBipar centros={dados.listaCentros} clientes={dados.listaClientes} aoBipar={recarregar} />
+            </>
           ) : (
             <p className="text-sm text-asfalto-500">O formulário aparece quando os dados carregarem.</p>
           )}
@@ -68,7 +79,7 @@ export function Operador() {
             {dados && <FiltroStatus valor={filtro} contagem={contagem} aoMudar={setFiltro} />}
           </div>
 
-          {carregando && <Carregando mensagem="Buscando lotes na API…" />}
+          {carregando && !dados && <Carregando mensagem="Buscando lotes na API…" />}
           {erro && <EstadoErro mensagem={erro} aoTentarDeNovo={recarregar} />}
           {dados && dados.lotes.length === 0 && (
             <EstadoVazio
