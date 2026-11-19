@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router'
 import { Layout } from './components/layout/Layout'
+import { Contato } from './pages/Contato'
 import { Faq } from './pages/Faq'
 import { Home } from './pages/Home'
 import { IntegranteDetalhe } from './pages/IntegranteDetalhe'
@@ -16,6 +17,7 @@ function App() {
         <Route path="integrantes" element={<Integrantes />} />
         <Route path="integrantes/:slug" element={<IntegranteDetalhe />} />
         <Route path="faq" element={<Faq />} />
+        <Route path="contato" element={<Contato />} />
         <Route path="*" element={<NaoEncontrada />} />
       </Route>
     </Routes>

@@ -14,7 +14,10 @@ export function LinhaParadas({ total, concluidas, posicaoCliente }: LinhaParadas
   const paradas = Array.from({ length: total }, (_, i) => i + 1)
 
   return (
-    <ol className="flex items-center" aria-label={`Parada ${concluidas + 1} de ${total}. Sua entrega é a parada ${posicaoCliente}.`}>
+    <ol
+      className="flex items-center"
+      aria-label={`Parada ${concluidas + 1} de ${total}. Sua entrega é a parada ${posicaoCliente}.`}
+    >
       {paradas.map((numero) => {
         const feita = numero <= concluidas
         const atual = numero === concluidas + 1

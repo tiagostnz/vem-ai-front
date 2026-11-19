@@ -22,9 +22,9 @@ export function Hero() {
             Pare de esperar a entrega <span className="text-marca-700">o dia inteiro.</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg text-asfalto-500">
-            “Em rota de entrega” desde as 8h e o pacote só chega à noite? Com o Vem Aí, você recebe um link no
-            WhatsApp quando o entregador está a <strong className="text-asfalto-900">2 ou 3 paradas</strong> da sua
-            casa. Sem instalar nada.
+            “Em rota de entrega” desde as 8h e o pacote só chega à noite? Com o Vem Aí, você recebe um link no WhatsApp
+            quando o entregador está a <strong className="text-asfalto-900">2 ou 3 paradas</strong> da sua casa. Sem
+            instalar nada.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link

@@ -18,8 +18,7 @@ export function Rodape() {
         <div className="max-w-xs">
           <Logo claro />
           <p className="mt-4 text-sm leading-relaxed text-asfalto-200">
-            Você só é avisado quando o entregador está a poucas paradas. Sem app, sem ficar preso em casa o dia
-            inteiro.
+            Você só é avisado quando o entregador está a poucas paradas. Sem app, sem ficar preso em casa o dia inteiro.
           </p>
         </div>
 

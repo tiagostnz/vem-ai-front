@@ -57,7 +57,9 @@ export function Publicos() {
         <ul className="mt-12 grid gap-5 md:grid-cols-3">
           {PUBLICOS.map((publico) => (
             <li key={publico.quem} className="flex flex-col rounded-3xl bg-asfalto-700/50 p-6 ring-1 ring-white/10">
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-marca-700">{publico.icone}</span>
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-marca-700">
+                {publico.icone}
+              </span>
               <p className="mt-5 text-sm font-semibold text-marca-500">{publico.quem}</p>
               <h3 className="mt-1 text-xl font-bold">{publico.titulo}</h3>
               <p className="mt-2 flex-1 text-asfalto-200">{publico.texto}</p>

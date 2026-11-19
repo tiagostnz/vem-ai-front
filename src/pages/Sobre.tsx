@@ -54,9 +54,7 @@ export function Sobre() {
               de alguém ou depende de transporte público acaba reorganizando o dia inteiro em torno de uma janela que
               ninguém informa.
             </p>
-            <p>
-              Para a transportadora, cliente ausente vira entrega frustrada, nova tentativa e ligação no SAC.
-            </p>
+            <p>Para a transportadora, cliente ausente vira entrega frustrada, nova tentativa e ligação no SAC.</p>
           </div>
         </section>
 
