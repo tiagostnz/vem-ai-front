@@ -29,3 +29,8 @@ export function iniciarRota(dados: IniciarRotaRequest): Promise<IniciarRotaRespo
 export function enviarLocalizacao(id: number, posicao: Coordenadas): Promise<Lote> {
   return request<Lote>(`/lotes/${id}/localizacao`, 'PUT', posicao)
 }
+
+/** Rota em andamento do entregador (mesmo formato do iniciar rota). A API responde 404 se não houver. */
+export function buscarRotaAtual(cdEntregador: number): Promise<IniciarRotaResponse> {
+  return request<IniciarRotaResponse>(`/entregadores/${cdEntregador}/lote-atual`)
+}
