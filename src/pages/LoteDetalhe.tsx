@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router'
+import { RemoverLote } from '../components/operador/RemoverLote'
 import { QrLote } from '../components/operador/QrLote'
 import { CardEncomenda } from '../components/encomenda/CardEncomenda'
 import { Carregando } from '../components/ui/Carregando'
@@ -112,6 +113,8 @@ export function LoteDetalhe() {
                 </p>
               )}
             </div>
+
+            {dados.lote.status === 'MONTAGEM' && <RemoverLote idLote={dados.lote.cdLote} />}
           </aside>
 
           <section aria-labelledby="titulo-encomendas">
