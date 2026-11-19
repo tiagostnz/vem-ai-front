@@ -1,4 +1,4 @@
-import { IconeAcessivel, IconeQr, IconeRelogio, IconeWhatsapp } from '../components/icones'
+import { IconeAcessivel, IconeCheck, IconeQr, IconeRelogio, IconeWhatsapp } from '../components/icones'
 import { CabecalhoPagina } from '../components/ui/CabecalhoPagina'
 import { Container } from '../components/ui/Container'
 import { useTitulo } from '../hooks/useTitulo'
@@ -24,6 +24,16 @@ const DIFERENCIAIS = [
     texto: 'Contraste AA, foco visível, textos simples e botões grandes na tela do entregador.',
     icone: IconeAcessivel,
   },
+]
+
+// o que foi feito na interface para incluir mais pessoas (requisitos não funcionais)
+const ACESSIBILIDADE = [
+  'Contraste mínimo AA (WCAG) em textos e botões',
+  'Foco bem visível para quem navega pelo teclado',
+  'Botões da tela do entregador com mais de 44 × 44 px, fáceis de tocar na rua',
+  'Rótulos, mensagens de erro e status lidos pelo leitor de tela',
+  'Animações desligadas para quem pede menos movimento no sistema',
+  'Textos curtos e palavras simples, pensados também para pessoas idosas',
 ]
 
 const CONCORRENTES = [
@@ -93,7 +103,30 @@ export function Sobre() {
         </Container>
       </section>
 
-      <Container className="py-16">
+      <section aria-labelledby="acessibilidade" className="py-16">
+        <Container className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+          <div>
+            <IconeAcessivel className="h-12 w-12 text-marca-700" />
+            <h2 id="acessibilidade" className="mt-4 text-3xl font-extrabold">
+              Acessibilidade não é extra
+            </h2>
+            <p className="mt-3 text-lg text-asfalto-500">
+              Muitos apps de entrega esquecem de quem enxerga pouco, usa celular simples ou trabalha com pressa na rua.
+              No Vem Aí, isso faz parte dos requisitos desde o começo.
+            </p>
+          </div>
+          <ul className="grid gap-3 sm:grid-cols-2">
+            {ACESSIBILIDADE.map((item) => (
+              <li key={item} className="flex gap-3 rounded-2xl bg-white p-4 ring-1 ring-asfalto-200">
+                <IconeCheck className="mt-0.5 h-5 w-5 shrink-0 text-sucesso" />
+                <span className="text-asfalto-700">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      <Container className="pb-16">
         <h2 className="text-3xl font-extrabold">O que já existe e onde para</h2>
         <p className="mt-3 max-w-2xl text-lg text-asfalto-500">
           Mapa de entregador não é novidade. O diferencial é juntar lote com QR, aviso na hora certa e acesso sem app.
