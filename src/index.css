@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  /* laranja da marca: o 500 é o do logo e só aparece como decoração */
+  --color-marca-50: #fff7ed;
+  --color-marca-100: #ffedd5;
+  --color-marca-200: #fed7aa;
+  --color-marca-500: #f97316;
+  /* 600 e 700 passam no contraste AA com texto branco, então são os dos botões */
+  --color-marca-600: #ea580c;
+  --color-marca-700: #c2410c;
+  --color-marca-800: #9a3412;
+
+  /* "asfalto": o tom escuro que divide a interface com o laranja */
+  --color-asfalto-50: #f6f7f9;
+  --color-asfalto-100: #eceef2;
+  --color-asfalto-200: #d5d9e0;
+  --color-asfalto-500: #5b6474;
+  --color-asfalto-700: #343a46;
+  --color-asfalto-900: #161a22;
+
+  --color-sucesso: #15803d;
+  --color-alerta: #b45309;
+  --color-perigo: #b91c1c;
+
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --animate-surgir: surgir 0.4s ease-out both;
+  --animate-pulso: pulso 1.6s ease-in-out infinite;
+
+  @keyframes surgir {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulso {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.35);
+      opacity: 0.5;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-asfalto-50 font-sans text-asfalto-900 antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+
+  /* foco bem visível em qualquer elemento navegável pelo teclado */
+  :focus-visible {
+    @apply outline-3 outline-offset-2 outline-marca-700;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
