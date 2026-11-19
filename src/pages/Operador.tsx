@@ -1,4 +1,6 @@
+import { useMemo, useState } from 'react'
 import { CardLote } from '../components/operador/CardLote'
+import { FiltroStatus, type FiltroLote } from '../components/operador/FiltroStatus'
 import { CabecalhoPagina } from '../components/ui/CabecalhoPagina'
 import { Carregando } from '../components/ui/Carregando'
 import { Container } from '../components/ui/Container'
@@ -23,6 +25,18 @@ async function carregarPainel() {
 export function Operador() {
   useTitulo('Painel do operador')
   const { dados, carregando, erro, recarregar } = useApi(carregarPainel)
+  const [filtro, setFiltro] = useState<FiltroLote>('TODOS')
+
+  const contagem = useMemo(() => {
+    const total: Record<FiltroLote, number> = { TODOS: 0, MONTAGEM: 0, EM_ROTA: 0, CONCLUIDO: 0 }
+    for (const lote of dados?.lotes ?? []) {
+      total.TODOS++
+      total[lote.status]++
+    }
+    return total
+  }, [dados])
+
+  const lotesFiltrados = (dados?.lotes ?? []).filter((lote) => filtro === 'TODOS' || lote.status === filtro)
 
   return (
     <>
@@ -33,7 +47,10 @@ export function Operador() {
       />
 
       <Container className="py-12">
-        <h2 className="mb-6 text-2xl font-extrabold">Lotes</h2>
+        <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <h2 className="text-2xl font-extrabold">Lotes</h2>
+          {dados && <FiltroStatus valor={filtro} contagem={contagem} aoMudar={setFiltro} />}
+        </div>
 
         {carregando && <Carregando mensagem="Buscando lotes na API…" />}
         {erro && <EstadoErro mensagem={erro} aoTentarDeNovo={recarregar} />}
@@ -43,9 +60,12 @@ export function Operador() {
             descricao="Crie o primeiro pacotão para começar a bipar encomendas."
           />
         )}
-        {dados && dados.lotes.length > 0 && (
+        {dados && dados.lotes.length > 0 && lotesFiltrados.length === 0 && (
+          <EstadoVazio titulo="Nenhum lote com esse status" descricao="Escolha outro filtro para ver mais lotes." />
+        )}
+        {dados && lotesFiltrados.length > 0 && (
           <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {dados.lotes.map((lote) => (
+            {lotesFiltrados.map((lote) => (
               <li key={lote.cdLote}>
                 <CardLote
                   lote={lote}
