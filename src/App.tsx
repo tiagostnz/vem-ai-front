@@ -9,6 +9,8 @@ import { Integrantes } from './pages/Integrantes'
 import { LoteDetalhe } from './pages/LoteDetalhe'
 import { NaoEncontrada } from './pages/NaoEncontrada'
 import { Operador } from './pages/Operador'
+import { Rastreio } from './pages/Rastreio'
+import { RastreioDetalhe } from './pages/RastreioDetalhe'
 import { RotaEntregador } from './pages/RotaEntregador'
 import { Sobre } from './pages/Sobre'
 
@@ -26,6 +28,8 @@ function App() {
         <Route path="operador/lotes/:id" element={<LoteDetalhe />} />
         <Route path="entregador" element={<Entregador />} />
         <Route path="entregador/lotes/:id" element={<RotaEntregador />} />
+        <Route path="rastreio" element={<Rastreio />} />
+        <Route path="rastreio/:codigo" element={<RastreioDetalhe />} />
         <Route path="*" element={<NaoEncontrada />} />
       </Route>
     </Routes>
