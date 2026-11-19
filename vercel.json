@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/:caminho*", "destination": "https://vem-ai-gs.onrender.com/:caminho*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
