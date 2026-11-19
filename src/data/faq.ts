@@ -42,6 +42,24 @@ export const PERGUNTAS: PerguntaFaq[] = [
       'O sistema parte do centro de distribuição e sempre escolhe o endereço mais próximo ainda não visitado. A cada entrega concluída, as paradas restantes de cada cliente são recalculadas.',
   },
   {
+    id: 'acessibilidade',
+    pergunta: 'O Vem Aí funciona para quem tem dificuldade de enxergar ou usar o celular?',
+    resposta:
+      'Sim. As telas têm contraste alto, letras grandes, botões grandes e funcionam com leitor de tela e pelo teclado. As mensagens usam palavras simples, pensadas também para pessoas idosas.',
+  },
+  {
+    id: 'internet',
+    pergunta: 'E se a minha internet for fraca?',
+    resposta:
+      'A página de rastreio é leve e se atualiza sozinha a cada 20 segundos. Se a conexão cair, é só esperar ou tocar em “Atualizar agora”. O mapa só carrega quando o entregador está perto.',
+  },
+  {
+    id: 'privacidade',
+    pergunta: 'Alguém mais consegue ver o meu endereço?',
+    resposta:
+      'Não. Quem tem o código vê só o status, quantas paradas faltam e o mapa perto da entrega. Seu nome e seu telefone não aparecem na página de rastreio.',
+  },
+  {
     id: 'custo',
     pergunta: 'Quanto custa para quem recebe?',
     resposta: 'Nada. Quem contrata o Vem Aí é a transportadora ou a loja. Para o cidadão, o serviço é gratuito.',
