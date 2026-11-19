@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router'
 import { Cabecalho } from './Cabecalho'
+import { Rodape } from './Rodape'
 
 export function Layout() {
   const { pathname } = useLocation()
@@ -22,6 +23,7 @@ export function Layout() {
       <main id="conteudo" className="flex-1">
         <Outlet />
       </main>
+      <Rodape />
     </div>
   )
 }
