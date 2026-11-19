@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router'
 import { Layout } from './components/layout/Layout'
 import { Home } from './pages/Home'
+import { Integrantes } from './pages/Integrantes'
 import { NaoEncontrada } from './pages/NaoEncontrada'
 import { Sobre } from './pages/Sobre'
 
@@ -10,6 +11,7 @@ function App() {
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="sobre" element={<Sobre />} />
+        <Route path="integrantes" element={<Integrantes />} />
         <Route path="*" element={<NaoEncontrada />} />
       </Route>
     </Routes>
