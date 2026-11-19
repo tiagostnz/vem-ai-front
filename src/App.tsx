@@ -5,6 +5,7 @@ import { Faq } from './pages/Faq'
 import { Home } from './pages/Home'
 import { IntegranteDetalhe } from './pages/IntegranteDetalhe'
 import { Integrantes } from './pages/Integrantes'
+import { LoteDetalhe } from './pages/LoteDetalhe'
 import { NaoEncontrada } from './pages/NaoEncontrada'
 import { Operador } from './pages/Operador'
 import { Sobre } from './pages/Sobre'
@@ -20,6 +21,7 @@ function App() {
         <Route path="faq" element={<Faq />} />
         <Route path="contato" element={<Contato />} />
         <Route path="operador" element={<Operador />} />
+        <Route path="operador/lotes/:id" element={<LoteDetalhe />} />
         <Route path="*" element={<NaoEncontrada />} />
       </Route>
     </Routes>
