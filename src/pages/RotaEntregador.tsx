@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import { Link, useParams } from 'react-router'
+import { BotaoEntregue } from '../components/entregador/BotaoEntregue'
 import { CardEncomenda } from '../components/encomenda/CardEncomenda'
+import { Aviso } from '../components/ui/Aviso'
 import { Carregando } from '../components/ui/Carregando'
 import { Container } from '../components/ui/Container'
 import { EstadoErro } from '../components/ui/EstadoErro'
@@ -10,6 +13,7 @@ import { useSessaoEntregador } from '../hooks/useSessaoEntregador'
 import { useTitulo } from '../hooks/useTitulo'
 import { listarClientes } from '../services/cadastroService'
 import { buscarLote, listarEncomendasDoLote } from '../services/loteService'
+import type { EntregaResponse } from '../types/api'
 import { indexarPor } from '../utils/formatar'
 
 async function carregarRota(id: number) {
@@ -29,6 +33,13 @@ export function RotaEntregador() {
   useTitulo(`Rota do lote #${id}`)
   const { entregador } = useSessaoEntregador()
   const { dados, carregando, erro, recarregar } = useApi(() => carregarRota(idLote), [idLote])
+  const [ultimaEntrega, setUltimaEntrega] = useState<EntregaResponse | null>(null)
+
+  function aoConcluirEntrega(resposta: EntregaResponse) {
+    setUltimaEntrega(resposta)
+    // busca de novo: a API recalculou status e paradas restantes
+    recarregar()
+  }
 
   if (!entregador) {
     return (
@@ -92,6 +103,19 @@ export function RotaEntregador() {
             </div>
           </header>
 
+          {ultimaEntrega && (
+            <div className="mt-4">
+              <Aviso tipo="sucesso">
+                Entrega confirmada!{' '}
+                {ultimaEntrega.paradasRestantesNoLote === 0
+                  ? 'Essa era a última parada. Rota concluída.'
+                  : `Faltam ${ultimaEntrega.paradasRestantesNoLote} paradas.`}
+                {ultimaEntrega.avisados.length > 0 &&
+                  ` ${ultimaEntrega.avisados.length} cliente(s) receberam o aviso de que você está chegando.`}
+              </Aviso>
+            </div>
+          )}
+
           {total === 0 ? (
             <EstadoVazio titulo="Lote sem encomendas" descricao="Não há paradas neste lote." />
           ) : (
@@ -107,6 +131,11 @@ export function RotaEntregador() {
                       endereco={cliente?.dsEndereco ?? 'Endereço indisponível'}
                       posicao={encomenda.nrPosicaoRota}
                       destaque={encomenda.cdEncomenda === proxima?.cdEncomenda}
+                      acoes={
+                        encomenda.status === 'EM_ROTA' && (
+                          <BotaoEntregue cdEncomenda={encomenda.cdEncomenda} aoConcluir={aoConcluirEntrega} />
+                        )
+                      }
                     />
                   </li>
                 )
