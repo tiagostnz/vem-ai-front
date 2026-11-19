@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router'
 import { RemoverLote } from '../components/operador/RemoverLote'
 import { QrLote } from '../components/operador/QrLote'
 import { BotaoCopiarLink } from '../components/encomenda/BotaoCopiarLink'
+import { BotaoWhatsapp } from '../components/encomenda/BotaoWhatsapp'
 import { CardEncomenda } from '../components/encomenda/CardEncomenda'
 import { Carregando } from '../components/ui/Carregando'
 import { Container } from '../components/ui/Container'
@@ -139,7 +140,19 @@ export function LoteDetalhe() {
                         nomeCliente={cliente?.nmCliente ?? `Cliente #${encomenda.cdCliente}`}
                         endereco={cliente?.dsEndereco ?? 'Endereço indisponível'}
                         posicao={encomenda.nrPosicaoRota}
-                        acoes={<BotaoCopiarLink codigo={encomenda.codigoRastreio} />}
+                        acoes={
+                          <>
+                            <BotaoCopiarLink codigo={encomenda.codigoRastreio} />
+                            {/* só faz sentido avisar quem ainda vai receber */}
+                            {cliente && encomenda.status === 'EM_ROTA' && (
+                              <BotaoWhatsapp
+                                telefone={cliente.nrWhatsapp}
+                                nomeCliente={cliente.nmCliente}
+                                codigoRastreio={encomenda.codigoRastreio}
+                              />
+                            )}
+                          </>
+                        }
                       />
                     </li>
                   )
