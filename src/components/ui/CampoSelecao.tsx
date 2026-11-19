@@ -28,7 +28,7 @@ export function CampoSelecao({ rotulo, opcoes, erro, placeholder = 'Selecione…
         id={id}
         aria-invalid={erro ? true : undefined}
         aria-describedby={erro ? idErro : undefined}
-        className={`min-h-12 rounded-xl border-2 bg-white px-4 text-base outline-none transition-colors focus:border-marca-700 ${
+        className={`min-h-12 w-full rounded-xl border-2 bg-white px-4 text-base outline-none transition-colors focus:border-marca-700 ${
           erro ? 'border-perigo' : 'border-asfalto-200'
         }`}
         {...props}
