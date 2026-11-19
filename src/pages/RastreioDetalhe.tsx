@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { LinhaParadas } from '../components/home/LinhaParadas'
 import { IconeAlerta, IconeCaixa, IconeCheck, IconePin, IconeRelogio } from '../components/icones'
+import { MapaEntrega } from '../components/rastreio/MapaEntrega'
 import { FormularioRastreio } from '../components/rastreio/FormularioRastreio'
 import { Carregando } from '../components/ui/Carregando'
 import { Container } from '../components/ui/Container'
@@ -81,6 +82,26 @@ function Situacao({ rastreio }: { rastreio: Rastreio }) {
       {paradas <= MAXIMO_NA_LINHA && (
         <div className="mt-6">
           <LinhaParadas total={paradas} concluidas={0} posicaoCliente={paradas} />
+        </div>
+      )}
+
+      {/* regra de negócio da API: o mapa só é liberado com 3 paradas ou menos */}
+      {rastreio.exibirMapa && rastreio.destino ? (
+        <div className="mt-8">
+          <MapaEntrega destino={rastreio.destino} entregador={rastreio.posicaoEntregador} />
+          {!rastreio.posicaoEntregador && (
+            <p className="mt-3 text-sm text-asfalto-500">
+              Aguardando o GPS do entregador. A posição dele aparece aqui assim que chegar.
+            </p>
+          )}
+        </div>
+      ) : (
+        <div className="mt-8 flex items-start gap-3 rounded-2xl bg-asfalto-50 p-4 text-sm text-asfalto-700">
+          <IconePin className="mt-0.5 h-5 w-5 shrink-0 text-marca-700" />
+          <p>
+            O mapa com o entregador ao vivo aparece quando faltarem <strong>3 paradas ou menos</strong>. Antes disso, a
+            posição dele fica protegida por privacidade.
+          </p>
         </div>
       )}
     </div>
