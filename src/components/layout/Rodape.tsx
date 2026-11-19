@@ -1,7 +1,14 @@
 import { Link } from 'react-router'
 import { INTEGRANTES } from '../../data/integrantes'
 import { LINKS_INSTITUCIONAIS, LINKS_SOLUCAO } from './links'
+import { IconeGithub } from '../icones'
 import { Logo } from './Logo'
+
+// links que o avaliador procura: código do front e a API Java publicada
+const LINKS_PROJETO = [
+  { href: 'https://github.com/tiagostnz/vem-ai-front', rotulo: 'Código no GitHub' },
+  { href: 'https://vem-ai-gs.onrender.com/lotes', rotulo: 'API Java (Render)' },
+]
 
 const classeLink = 'rounded text-sm text-asfalto-200 transition-colors hover:text-white'
 
@@ -67,6 +74,22 @@ export function Rodape() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-6 text-xs text-asfalto-200 sm:flex-row sm:justify-between sm:px-6">
           <p>Vem Aí · Global Solution 2026 · CitizenTech</p>
+          <ul className="flex flex-wrap gap-x-5 gap-y-1">
+            {LINKS_PROJETO.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded hover:text-white"
+                >
+                  {link.href.includes('github.com') && <IconeGithub className="h-3.5 w-3.5" />}
+                  {link.rotulo}
+                  <span className="sr-only">(abre em nova aba)</span>
+                </a>
+              </li>
+            ))}
+          </ul>
           <p>FIAP · Turma 1TDSPJ</p>
         </div>
       </div>
