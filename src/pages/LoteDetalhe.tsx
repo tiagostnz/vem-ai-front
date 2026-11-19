@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router'
+import { QrLote } from '../components/operador/QrLote'
 import { CardEncomenda } from '../components/encomenda/CardEncomenda'
 import { Carregando } from '../components/ui/Carregando'
 import { Container } from '../components/ui/Container'
@@ -63,6 +64,8 @@ export function LoteDetalhe() {
               </div>
               <StatusBadge status={dados.lote.status} />
             </div>
+
+            {dados.lote.status === 'MONTAGEM' && <QrLote codigo={dados.lote.codigoQr} />}
 
             <dl className="grid grid-cols-2 gap-4 text-sm">
               <div>
