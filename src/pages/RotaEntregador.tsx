@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router'
+import { IndicadorGps } from '../components/entregador/IndicadorGps'
 import { BotaoEntregue } from '../components/entregador/BotaoEntregue'
 import { CardEncomenda } from '../components/encomenda/CardEncomenda'
 import { Aviso } from '../components/ui/Aviso'
@@ -9,6 +10,7 @@ import { EstadoErro } from '../components/ui/EstadoErro'
 import { EstadoVazio } from '../components/ui/EstadoVazio'
 import { StatusBadge } from '../components/ui/StatusBadge'
 import { useApi } from '../hooks/useApi'
+import { useLocalizacao } from '../hooks/useLocalizacao'
 import { useSessaoEntregador } from '../hooks/useSessaoEntregador'
 import { useTitulo } from '../hooks/useTitulo'
 import { listarClientes } from '../services/cadastroService'
@@ -34,6 +36,8 @@ export function RotaEntregador() {
   const { entregador } = useSessaoEntregador()
   const { dados, carregando, erro, recarregar } = useApi(() => carregarRota(idLote), [idLote])
   const [ultimaEntrega, setUltimaEntrega] = useState<EntregaResponse | null>(null)
+  // GPS ligado só durante a rota e com o entregador logado
+  const gps = useLocalizacao(idLote, Boolean(entregador) && dados?.lote.status === 'EM_ROTA')
 
   function aoConcluirEntrega(resposta: EntregaResponse) {
     setUltimaEntrega(resposta)
@@ -102,6 +106,10 @@ export function RotaEntregador() {
               />
             </div>
           </header>
+
+          <div className="mt-2">
+            <IndicadorGps estado={gps.estado} ultimoEnvio={gps.ultimoEnvio} falhaEnvio={gps.falhaEnvio} />
+          </div>
 
           {ultimaEntrega && (
             <div className="mt-4">
