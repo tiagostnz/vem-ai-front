@@ -7,7 +7,7 @@ const classeLink = 'rounded text-sm text-asfalto-200 transition-colors hover:tex
 
 export function Rodape() {
   return (
-    <footer className="mt-20 bg-asfalto-900 text-white">
+    <footer className="bg-asfalto-900 text-white">
       {/* faixa tracejada lembrando a pista de uma rua */}
       <div
         aria-hidden="true"
