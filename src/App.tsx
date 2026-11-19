@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router'
 import { Layout } from './components/layout/Layout'
 import { Contato } from './pages/Contato'
+import { Entregador } from './pages/Entregador'
 import { Faq } from './pages/Faq'
 import { Home } from './pages/Home'
 import { IntegranteDetalhe } from './pages/IntegranteDetalhe'
@@ -22,6 +23,7 @@ function App() {
         <Route path="contato" element={<Contato />} />
         <Route path="operador" element={<Operador />} />
         <Route path="operador/lotes/:id" element={<LoteDetalhe />} />
+        <Route path="entregador" element={<Entregador />} />
         <Route path="*" element={<NaoEncontrada />} />
       </Route>
     </Routes>
