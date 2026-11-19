@@ -1,5 +1,17 @@
+import { Route, Routes } from 'react-router'
+import { Layout } from './components/layout/Layout'
+import { Home } from './pages/Home'
+import { NaoEncontrada } from './pages/NaoEncontrada'
+
 function App() {
-  return <h1 className="p-8 text-4xl font-extrabold text-marca-700">Vem Aí</h1>
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="*" element={<NaoEncontrada />} />
+      </Route>
+    </Routes>
+  )
 }
 
 export default App
