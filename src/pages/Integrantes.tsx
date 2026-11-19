@@ -12,7 +12,7 @@ export function Integrantes() {
       <CabecalhoPagina
         etiqueta="Equipe"
         titulo="Quem fez o Vem Aí"
-        descricao="Cinco estudantes da turma 1TDSPJ da FIAP, cada um responsável por uma camada da solução."
+        descricao="Cinco estudantes da turma 1TDSPJ da FIAP."
       />
       <Container className="py-16">
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">

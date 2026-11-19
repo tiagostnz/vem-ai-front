@@ -28,8 +28,7 @@ export function IntegranteDetalhe() {
           className="aspect-square w-full max-w-[280px] rounded-2xl bg-marca-100 object-cover object-top"
         />
         <div>
-          <p className="font-semibold text-marca-700">{integrante.papel}</p>
-          <h1 className="mt-1 text-3xl font-extrabold md:text-4xl">{integrante.nome}</h1>
+          <h1 className="text-3xl font-extrabold md:text-4xl">{integrante.nome}</h1>
           <dl className="mt-4 flex flex-wrap gap-x-8 gap-y-2 text-asfalto-700">
             <div>
               <dt className="text-xs font-semibold uppercase tracking-wider text-asfalto-500">RM</dt>
@@ -40,16 +39,6 @@ export function IntegranteDetalhe() {
               <dd className="text-lg font-semibold">{integrante.turma}</dd>
             </div>
           </dl>
-
-          <h2 className="mt-8 text-lg font-bold">No projeto</h2>
-          <ul className="mt-3 space-y-2">
-            {integrante.responsabilidades.map((item) => (
-              <li key={item} className="flex gap-3 text-asfalto-700">
-                <span aria-hidden="true" className="mt-2 h-2 w-2 shrink-0 rounded-full bg-marca-500" />
-                {item}
-              </li>
-            ))}
-          </ul>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <a

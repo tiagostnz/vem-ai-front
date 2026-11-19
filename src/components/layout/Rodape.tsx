@@ -56,7 +56,7 @@ export function Rodape() {
             {INTEGRANTES.map((integrante) => (
               <li key={integrante.slug}>
                 <Link to={`/integrantes/${integrante.slug}`} className={classeLink}>
-                  {integrante.nome.split(' ')[0]} · {integrante.papel}
+                  {integrante.nome}
                 </Link>
               </li>
             ))}

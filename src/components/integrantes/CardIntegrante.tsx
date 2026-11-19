@@ -21,8 +21,7 @@ export function CardIntegrante({ integrante, compacto = false }: CardIntegranteP
         />
       </div>
       <div className="flex flex-1 flex-col p-5">
-        <p className="text-sm font-semibold text-marca-700">{integrante.papel}</p>
-        <h2 className={`mt-1 font-bold leading-tight ${compacto ? 'text-base' : 'text-xl'}`}>{integrante.nome}</h2>
+        <h2 className={`font-bold leading-tight ${compacto ? 'text-base' : 'text-xl'}`}>{integrante.nome}</h2>
         <p className="mt-2 text-sm text-asfalto-500">
           RM {integrante.rm} · {integrante.turma}
         </p>
