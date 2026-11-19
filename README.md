@@ -9,6 +9,7 @@ Projeto da **Global Solution 2026 · 2º semestre (CitizenTech)**, disciplina de
 | 🌐 Aplicação publicada (Vercel) | https://vem-ai-zeta.vercel.app |
 | 💻 Repositório (GitHub) | https://github.com/tiagostnz/vem-ai-front |
 | ☕ API Java (Render) | https://vem-ai-gs.onrender.com |
+| 🎬 Vídeo (YouTube) | https://youtu.be/-petAyehKTw |
 
 ![Home do Vem Aí](docs/prints/home-desktop.png)
 
