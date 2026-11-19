@@ -43,6 +43,7 @@ export const INTEGRANTES: Integrante[] = [
     rm: '571324',
     turma: '1TDSPJ',
     foto: '/img/integrantes/henrique.jpg',
+    posicaoFoto: 'object-[center_40%]',
     github: 'https://github.com/HenriqueOsuka',
     linkedin: 'https://www.linkedin.com/in/henrique-osuka-78a0993b5/',
   },

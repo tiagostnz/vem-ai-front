@@ -17,7 +17,7 @@ export function CardIntegrante({ integrante, compacto = false }: CardIntegranteP
           src={integrante.foto}
           alt={`Foto de ${integrante.nome}`}
           loading="lazy"
-          className="h-full w-full object-cover object-top transition duration-300 group-hover:scale-105"
+          className={`h-full w-full object-cover ${integrante.posicaoFoto ?? 'object-top'} transition duration-300 group-hover:scale-105`}
         />
       </div>
       <div className="flex flex-1 flex-col p-5">

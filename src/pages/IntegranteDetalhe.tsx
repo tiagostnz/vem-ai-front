@@ -25,7 +25,7 @@ export function IntegranteDetalhe() {
         <img
           src={integrante.foto}
           alt={`Foto de ${integrante.nome}`}
-          className="aspect-square w-full max-w-[280px] rounded-2xl bg-marca-100 object-cover object-top"
+          className={`aspect-square w-full max-w-[280px] rounded-2xl bg-marca-100 object-cover ${integrante.posicaoFoto ?? 'object-top'}`}
         />
         <div>
           <h1 className="text-3xl font-extrabold md:text-4xl">{integrante.nome}</h1>

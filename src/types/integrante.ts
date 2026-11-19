@@ -4,6 +4,8 @@ export type Integrante = {
   rm: string
   turma: string
   foto: string
+  /** ajuste do enquadramento da foto (classe object-position do Tailwind) */
+  posicaoFoto?: string
   github: string
   linkedin: string
 }
