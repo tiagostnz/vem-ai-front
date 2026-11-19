@@ -1,3 +1,4 @@
+import { ChamadaFinal } from '../components/home/ChamadaFinal'
 import { ComoFunciona } from '../components/home/ComoFunciona'
 import { Hero } from '../components/home/Hero'
 import { Publicos } from '../components/home/Publicos'
@@ -11,6 +12,7 @@ export function Home() {
       <Hero />
       <ComoFunciona />
       <Publicos />
+      <ChamadaFinal />
     </>
   )
 }
