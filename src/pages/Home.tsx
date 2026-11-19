@@ -1,3 +1,12 @@
+import { Hero } from '../components/home/Hero'
+import { useTitulo } from '../hooks/useTitulo'
+
 export function Home() {
-  return <h1 className="p-8 text-4xl font-extrabold text-marca-700">Vem Aí</h1>
+  useTitulo('Início')
+
+  return (
+    <>
+      <Hero />
+    </>
+  )
 }
